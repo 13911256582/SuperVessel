@@ -1,0 +1,239 @@
+@charset "utf-8";
+/* CSS Document */
+
+@charset "UTF-8";
+
+html 	
+{ 
+		min-width: 800px;
+		background: #f0f0f0;
+}
+
+body	{
+		margin: 0;
+		padding: 0;
+		border: 0;
+		text-align: left;
+		display: block;
+		background: #f0f0f0 top center repeat-y;
+		font: 12px Verdana, Arial, Helvetica, sans-serif;
+		}
+
+a:link{text-decoration:none ; color:grey ;}
+a:visited {text-decoration:none ; color:grey;}
+a:hover {color:#09F;}
+a:active {text-decoration:none ; color:grey;}
+
+#container
+{
+	position:absolute;
+	width:1000px;
+	left:50%;
+	margin-left: -500px;
+}
+
+div.index_left
+{
+	margin: 10px;
+	width: 180px;
+	float: left;
+	display:inline-block;
+	background-color:white;
+}
+
+div.index_left ul
+{
+	margin: 0;
+	padding: 0;
+}
+
+div.index_left ul li
+{
+	margin: 0;
+	padding: 0px;
+	width: 180px;
+	height: 60px;
+	list-style-type: none;
+	float: left;
+	border-bottom:1px solid #CCC;
+}
+
+div.index_left ul li:hover {background-color: #09F;}
+
+
+a.index_left
+{
+	width: 200px;
+	height: 60px;
+}
+
+a.index_left p
+{
+	font-size: 18px;
+	text-align: center;
+	color: #666;
+}
+
+div.index_content
+{
+	margin: 10px;
+	padding: 0;
+	width: 780px;
+	display:inline-block;
+	float: left;
+	position: relative;
+	background-color: white;
+}
+
+
+div.course
+{
+	width: 780px;
+	margin: 0px;
+	padding: 10px;
+}
+
+
+div.course_image
+{
+	width: 210px;
+	margin: 0px;
+	height: 200px;
+	float: left;
+	display: inline;
+	background-color:white;
+}
+
+
+div.course_content
+{
+	margin: 0px;
+	padding: 0px;
+	width: 550px;
+	height: 200px;
+	float:left;
+	display:inline;
+	background-color:white;
+}
+
+div.course_introduction
+{
+	height: 160px;
+}
+
+div.course_start
+{
+	height: 50px;
+}
+
+div.course_footer
+{
+	height: 30px;
+	float: right;
+}
+
+
+
+ul.courses
+{
+	margin: 0;
+	padding: 0;
+}
+
+ul.courses li
+{
+	margin: 0;
+	padding: 0px;
+	width: 780px;
+	list-style-type: none;
+	float: left;
+	border-bottom:1px solid #CCC;
+}
+
+p.course_content
+{
+	margin: 0;
+	padding: 0;
+}
+
+label
+{
+	color: grey;
+}
+
+p
+{
+	color: #666;
+}
+
+div.course_content p
+{
+	font-size: 14px;
+}
+
+a.course_start
+{
+	background-color:#09F;
+	color: white;
+	padding: 7px;
+	font-size: 14px;
+	border-radius: 5px;
+	float: right;
+}
+
+h1.title label
+{
+	background-color:#F00;
+	color: white;
+	border-radius: 3px;
+	padding: 2px;
+	font-size:17px;
+	
+}
+
+div.lesson
+{
+	width: 700px;
+}
+
+h2.lesson
+{
+	padding: 10px;
+}
+
+div.lesson td
+{
+	padding: 10px;
+}
+
+div.save
+{
+	padding: 10px;
+}
+
+input.save
+{
+	width: 100px;
+	padding: 5px;
+	background-color:#09F;
+	color: white;
+	font-size: 14px;
+}
+
+div.new_class
+{
+	margin: 10px;
+	padding: 10px;
+	width: 780px;
+	display:inline-block;
+	float: left;
+	position: relative;
+	background-color: white;
+}
+
+
+div.imgload
+{
+	width: 300px;
+	height: 200px;
+}

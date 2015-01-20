@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>创建新课程</title>
+
+{% load staticfiles %}
+<link href='{% static "index.css" %}' rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    
+<div id="container">
+
+	<div class="new_class">
+    	<h2 class="lesson"><span style="font-family: 微软雅黑; color: black">上传新课程</h2>
+        	<div class="lesson">
+
+              <form action="/new/" method="post">
+                {% csrf_token %}
+                
+                <table>
+                <tr>
+                    <td><label>标题:</label></td>
+                    <td><input type="text" name="title" size="80"/></td>
+                </tr>
+                 <tr>
+                    <td><label>作者:</label></td>
+                    <td><input type="text" name="author" size="80"/></td>
+                </tr>
+                <tr>
+                    <td><label>简介:</label></td>
+                    <td><textarea rows="5" name="description" cols="50"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label>视频URL:</label></td>
+                    <td><input type="URL" name="videoURL" size="80"/></td>
+                </tr>
+                
+                <tr>
+                    <td><label>上图片:</label></td> 
+                    <td>
+                    <div>
+                        <input name="imgfile" type="file" id="imgfile" size="28" onchange="viewmypic(showimg,this);" />       
+                    </div>  
+                    </td>
+                </tr>       
+                <tr>
+                    <td><label>分类:</label></td>
+                    <td><select name="category">
+                        <option value="others">无</option>
+                        <option value="c">C/C++</option>
+                        <option value="java">JAVA</option>
+                        <option value="bigdata">大数据</option>
+                    </select></td>
+                </tr>     
+
+
+                </table>
+              	
+                <div class="save">
+                	<input class="save" type="submit" value="保存"/>
+                </div>
+              </form>
+            </tr>
+            </div>
+    </div>
+</div>
+</body>
+
+<script>       
+function viewmypic(mypic,imgfile) {        
+if (imgfile.value){        
+mypic.src=imgfile.value;        
+mypic.style.display="";        
+mypic.border=1;        
+}        
+}        
+</script>  
+
+</html>  

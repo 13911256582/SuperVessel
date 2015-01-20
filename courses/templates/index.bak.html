@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>课程</title>
+
+{% load staticfiles %}
+<link href='{% static "index.css" %}' rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="container">
+   
+  <div class="index_left">
+      <ul class="index_left">
+          <li><a class="index_left" href="#"><p>全部</p></a></li>
+            <li><a class="index_left" href="#"><p>热门</p></a></li>
+          <li><a class="index_left" href="#"><p>C/C++</p></a></li>
+            <li><a class="index_left" href="#"><p>Web编程</p></a></li>
+            <li><a class="index_left" href="#"><p>大数据</p></a></li>
+            <li><a class="index_left" href="#"><p>工程计算</p></a></li>
+        </ul>
+  </div>
+
+
+  <div class="index_content">
+      <ul class="courses">
+      {% for course in courses %}
+          <li class="course">
+              
+              <div class="course">
+                  <div class="course_header">
+                    
+
+                      <h1 class="title"><label>新</label><span style="font-family: 微软雅黑; color: black">{{course.title}}</span></h1>
+   
+                    <p>作者：{{course.author}}</p>
+                  </div>
+                  
+                  <div class="course_image">
+                      <!--<a href="http://www.tudou.com/v/5gAyYDcvHTk/&resourceId=0_04_05_99/v.swf"> -->
+                      <a href='{{ course.id }}'>
+                          <img src='{% static "Tulips%2020.jpg" %}'/>
+                      </a>
+                      <p>时长：3分15秒</p>
+                  </div>
+                  
+                    
+                  
+                  <div class="course_content">
+                      <div class="course_introduction">
+                        <p class="course_content">{{ course.description }}</p>
+                      </div>
+                      
+                      <div class="course_footer">
+                        <label><span style="font-size: 20px">学生数：{{course.viewCount}} | </span></label>
+                        <label><span style="font-size: 20px">评论数：{{course.commentCount}} </span></label>
+                      </div>
+                       
+                  </div>
+                    
+              </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
