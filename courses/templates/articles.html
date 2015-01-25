@@ -5,7 +5,7 @@
     <title></title>
   
 {% load staticfiles %}
-  <link href='{% static "bootstrap.min.css" %}' rel="stylesheet" type="text/css" />
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet">
   <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
   <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
   </head>
@@ -28,10 +28,7 @@
 
             <div class="row">
             <div class="col-md-4">
-              {% autoescape off %}
-                {{article.coverImg}}
-              {% endautoescape %}
-
+                <img src="{{article.coverImg}}" width="200px" height="150px" />
             </div>
             
             <div class="col-md-6">

@@ -1,27 +1,79 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<div id="localImag"  style="width: 300px; height: 200px">
+   <img id="preview" alt="预览图片" src="../../Images/noImage.gif" width="300px" height="200px" />
+</div>
+<input id="PicLoad" Width="300px" type="file" onchange="javascript:setImagePreview(this,localImag,preview);"></input>
+<input id="submit" type="submit" onclick="javascript:submitImg(PicLoad, preview)">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <h1>你好，世界！</h1>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>
+
+<script type="text/javascript">
+        function setImagePreview(docObj,localImagId,imgObjPreview) 
+        {
+            if(docObj.files && docObj.files[0])
+            {
+                //火狐下，直接设img属性
+                imgObjPreview.style.display = 'block';
+                imgObjPreview.style.width = '300px';
+                imgObjPreview.style.height = '200px';                
+
+
+                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
+                imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+                console.log("img file", docObj.files[0]);
+                console.log("imgobj", imgObjPreview);
+            }
+            else
+            {
+                //IE下，使用滤镜
+                docObj.select();
+                var imgSrc = document.selection.createRange().text;
+                
+                //必须设置初始大小
+                localImagId.style.width = "300px";
+                localImagId.style.height = "200px";
+                
+                //图片异常的捕捉，防止用户修改后缀来伪造图片
+                try
+                {
+                    localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                    localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                 }
+                 catch(e)
+                 {
+                    alert("您上传的图片格式不正确，请重新选择!");
+                    return false;
+                  }                          
+                  imgObjPreview.style.display = 'none';
+                  document.selection.empty();
+            }
+            return true;
+        }
+
+
+  function convertImgToBase64URL(url, base64Img, outputFormat){
+    var canvas = document.createElement('CANVAS'),
+        ctx = canvas.getContext('2d'),
+        img = new Image;
+    img.crossOrigin = 'Anonymous';
+    img.onload = function(){
+        //var dataURL;
+        canvas.height = img.height;
+        canvas.width = img.width;
+        ctx.drawImage(img, 0, 0);
+        base64Img = canvas.toDataURL(outputFormat);
+        canvas = null; 
+    };
+    img.src = url;
+    }
+
+    function submitImg(docObj, imgObjPreview){
+        var base64Img;
+        console.log("file:", docObj.files[0])
+        convertImgToBase64URL(imgObjPreview.src, base64Img, docObj.files[0].type);
+        console.log("base64Img:", base64Img);
+
+    }
+</script>
+

@@ -14,9 +14,16 @@ urlpatterns = patterns('',
     url(r'^index/$', 'courses.views.index', name='index'),
     url(r'^new/$', 'courses.views.new', name='new'),
     url(r'^code/$', 'courses.views.code'),
-    url(r'^article/$', 'courses.views.articles'),
-    url(r'^article/new/$', 'courses.views.newArticle'),
-    #/1 => show
+
+    #for normal users
+    url(r'^article/index/$', 'courses.views.articles'),
     url(r'^article/(?P<article_id>\w+)/$', 'courses.views.article'),
+
+    #for admin
+    url(r'^admin/article/index/$', 'courses.views.index'),
+    url(r'^admin/article/new/$', 'courses.views.new'),
+    url(r'^admin/article/(?P<article_id>\w+)/$', 'courses.views.review'),
+    url(r'^admin/article/(?P<article_id>\w+)/publish/$', 'courses.views.publish'),
+    url(r'^admin/article/(?P<article_id>\w+)/delete/$', 'courses.views.delete'),
     
 )
