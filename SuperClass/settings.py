@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'b2he4i-a9u!_^dhcb6ke8*ds!8f0th=-5!xa$xvg$z-vj@s+9g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -94,4 +94,4 @@ STATIC_DIRS = ('/static/')
 
 
 PUBLISH_HOST = '127.0.0.1:8000'
-PUBLISH_URL = '/accept'
+PUBLISH_URL = '/accept/'

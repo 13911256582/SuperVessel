@@ -12,7 +12,6 @@ import datetime
 
 import urllib,httplib  
 
-
 from courses.models import *
 from SuperClass.settings import *
 
@@ -134,13 +133,21 @@ def publish(req, article_id):
 			return HttpResponse("too many matched article")
 
 		else:
-			
-			params = urllib.urlencode({'name': 'tom', 'age': 22})
-			print params
-			headers = {"Content-Type":"text/html;charset=gb2312"}
 
-			httpClient = httplib.HTTPConnection("www.baidu.com", 80)
-			httpClient.request("GET", "/")
+			params = urllib.urlencode(
+				{ 'uuid': articles[0].uuid.hex,
+				  'title': articles[0].title,
+				  'abstract': articles[0].abstract,
+				  'coverImg': articles[0].coverImg,
+				  'content': articles[0].content,
+				  'createdTime': articles[0].createdTime
+				 }
+			)
+
+			headers = {"Content-Type":"application/x-www-form-urlencoded"}
+
+			httpClient = httplib.HTTPConnection(PUBLISH_HOST)
+			httpClient.request("POST", PUBLISH_URL, params, headers)
 
 			response = httpClient.getresponse()
 			
@@ -148,7 +155,12 @@ def publish(req, article_id):
 
 def accept(req):
 	if req.method == 'POST':
-		print req.POST['name']
-		print req.POST['age']
-
-		return HttpResponse('ok')
+		
+		return HttpResponse(
+			req.POST['uuid'] + 
+			req.POST['title'] +
+			req.POST['abstract'] +
+			req.POST['coverImg'] +
+			req.POST['content'] +
+			req.POST['createdTime']
+		)
