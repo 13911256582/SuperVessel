@@ -11,9 +11,10 @@ urlpatterns = patterns('',
 
     #default to index
     #url(r'^courses/', include('courses.urls')),
-    url(r'^index/$', 'courses.views.index', name='index'),
-    url(r'^new/$', 'courses.views.new', name='new'),
-    url(r'^code/$', 'courses.views.code'),
+    #url(r'^index/$', 'courses.views.index', name='index'),
+    #url(r'^new/$', 'courses.views.new', name='new'),
+    #url(r'^code/$', 'courses.views.code'),
+    url(r'^accept/$', 'courses.views.accept'),
 
     #for normal users
     url(r'^article/index/$', 'courses.views.articles'),
