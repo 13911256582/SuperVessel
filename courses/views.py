@@ -10,8 +10,11 @@ import Image
 import uuid
 import datetime
 
+import urllib,httplib  
+
 
 from courses.models import *
+from SuperClass.settings import *
 
 # Create your views here.
 
@@ -83,7 +86,7 @@ def new(req):
 		article.createdTime = datetime.datetime.now
 
 		if article.save():
-			url = 'http://127.0.0.1:8000/admin/article/' + article.uuid
+			url = '/admin/article/' + article.uuid
 			return HttpResponse(url)
 
 		else:
@@ -118,61 +121,34 @@ def delete(req,article_id):
 		
 		return HttpResponseRedirect('/admin/article/index')
 
-
+#post article_id to external server
 def publish(req, article_id):
-	return
-
-
-def save(req):
 	if req.method == 'POST':
+		return
+	else:
+		articles = Article.objects(uuid = article_id)
+		if len(articles) == 0:
+			return HttpResponse("No matched article")
 
-
-		title = req.POST['title']
-		abstract = req.POST['abstract']
-		coverImg = req.POST['coverImg']
-		content = req.POST['content']
-
-
-		#check upload image size
-		if len(coverImg) > 300 * 1024:
-			err = "cover image is bigger than 100KB"
-			return HttpResponse(err)
-
-		if len(content) > 500 * 1024:
-			err = "content is bigger than 300KB"
-			return HttpResponse(err)
-
-		article = Article()
-		#article.uuid = uuid.uuid1().hex
-		article.title = title
-		article.abstract = abstract
-		article.coverImg = coverImg
-		article.content = content
-		article.createdTime = datetime.datetime.now
-
-		if article.save():
-			url = 'http://127.0.0.1:8000/article/' + article.uuid
-			return HttpResponse(url)
+		if len(articles) != 1:
+			return HttpResponse("too many matched article")
 
 		else:
-			print "write articole to DB error"
-			return HttpResponse(err)
+			
+			params = urllib.urlencode({'name': 'tom', 'age': 22})
+			print params
+			headers = {"Content-Type":"text/html;charset=gb2312"}
 
-		#if form.is_valid():
-		#	code = form.cleaned_data['code']
-		#	print code
-		#print "title:", title
-		#print "abstract:", abstract
-		#print "coverImg:", coverImg
-		#print "content:", content
-		
-		#return HttpResponse('ok')
-	#		return HttpResponseRedirect('/index/')
-	#else:
+			httpClient = httplib.HTTPConnection("www.baidu.com", 80)
+			httpClient.request("GET", "/")
 
-		#form = CodeForm()
-		
-	else:
-		return HttpResponse("[POST} /article/save is not supported")
-		
+			response = httpClient.getresponse()
+			
+			return HttpResponse(response.read())
 
+def accept(req):
+	if req.method == 'POST':
+		print req.POST['name']
+		print req.POST['age']
+
+		return HttpResponse('ok')

@@ -7,8 +7,8 @@
 {% load staticfiles %}
 <!--  <link href='{% static "bootstrap.min.css" %}' rel="stylesheet" type="text/css" />
 -->
-  <link href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet">
-  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link href="/static/bootstrap.css" rel="stylesheet">
+  <link href="/static/bootstrap-responsive.min.css" rel="stylesheet">
   <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
   </head>
 
@@ -216,10 +216,10 @@ div[data-role="editor-toolbar"] {
  
   
 
-<script src='{% static "jquery-1.11.2.min.js" %}'></script>
-<script src='{% static "jquery.hotkeys.js" %}'></script>
-<script src='{% static "bootstrap-wysiwyg.js" %}'></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/static/jquery-1.11.2.min.js"></script>
+<script src="/static/jquery.hotkeys.js"></script>
+<script src="/static/bootstrap-wysiwyg.js"></script>
+<script src="/static/bootstrap.min.js"></script>
 <!--
 <script src='{% static "bootstrap.min.js" %}'></script>
 -->
@@ -336,7 +336,7 @@ $(document).ready(function(){
       }); 
 
 
-      $.post("http://127.0.0.1:8000/admin/article/new/", postdict , function(data, status){
+      $.post("/admin/article/new/", postdict , function(data, status){
         //alert(JSON.stringify(data));
         window.location.href = data;
         //alert(data);
@@ -346,14 +346,10 @@ $(document).ready(function(){
       });
           
   }, picLoad.files[0].type);
-  //if(coverImg.toString().length > 300 * 1024){
-  //  alert("图片大小：" + coverImg.toString().length + "\n" + "图片必须 < 300KB");
-  //  return;
-  //}
+
 
   console.log("base64Img:", coverImg);
   
-     //StandardPost("http://127.0.0.1:8000/article/", postdict);
   });
 });
 
