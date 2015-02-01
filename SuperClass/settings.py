@@ -81,7 +81,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static')
+
+
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, "static"),
+#    '/home/shaol/Documents/projects/SuperVessel/courses/static/',
+#)
+
 STATIC_URL = '/static/'
+STATIC_DIRS = ('/static/')
+
 
 PUBLISH_HOST = '127.0.0.1:8000'
 PUBLISH_URL = '/accept'

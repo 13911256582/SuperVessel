@@ -1,5 +1,7 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include, url 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
+import settings
 
 
 urlpatterns = patterns('',
@@ -26,5 +28,6 @@ urlpatterns = patterns('',
     url(r'^admin/article/(?P<article_id>\w+)/$', 'courses.views.review'),
     url(r'^admin/article/(?P<article_id>\w+)/publish/$', 'courses.views.publish'),
     url(r'^admin/article/(?P<article_id>\w+)/delete/$', 'courses.views.delete'),
-    
 )
+
+urlpatterns += staticfiles_urlpatterns()

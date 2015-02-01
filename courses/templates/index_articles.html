@@ -5,8 +5,8 @@
     <title></title>
   
 {% load staticfiles %}
-  <link href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet">
-  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link href="/static/bootstrap.css" rel="stylesheet">
+  <link href="/static/bootstrap-responsive.min.css" rel="stylesheet">
   <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
   </head>
 
@@ -15,7 +15,7 @@
 
     <div class="page-header">
           <h1><span style="font-family: 微软雅黑;">新闻</span></h1>
-          <button id="submit" type="submit" class="btn btn-primary" onclick="location='http://127.0.0.1:8000/admin/article/new'">创建</button>
+          <button id="submit" type="submit" class="btn btn-primary" onclick="location='/admin/article/new'">创建</button>
     </div>
    
     <ul class="list-group">
@@ -23,7 +23,7 @@
         <li class="list-group-item" style="border: none">
             <div class="row">
             <div class="col-md-8">
-            <h2><span style="font-family: 微软雅黑; color: black"><a href="http://127.0.0.1:8000/article/{{article.uuid.hex}}">{{article.title}}</a></span></h2>
+            <h2><span style="font-family: 微软雅黑; color: black"><a href="admin/article/{{article.uuid.hex}}">{{article.title}}</a></span></h2>
             </div>
             </div>
 
@@ -33,7 +33,7 @@
             </div>
             
             <div class="col-md-6">
-              <p><span style="font-size: 18px; font-family: 微软雅黑; color: grey">{{article.abstract}}<a href="http://127.0.0.1:8000/admin/article/{{article.uuid.hex}}">[详细]</a></span></p> 
+              <p><span style="font-size: 18px; font-family: 微软雅黑; color: grey">{{article.abstract}}<a href="/admin/article/{{article.uuid.hex}}">[详细]</a></span></p> 
             </div>
             </div>               
 
