@@ -93,5 +93,9 @@ STATIC_URL = '/static/'
 STATIC_DIRS = ('/static/')
 
 
-PUBLISH_HOST = '127.0.0.1:8000'
-PUBLISH_URL = '/accept/'
+#PUBLISH_HOST = '127.0.0.1:8000'
+#PUBLISH_URL = '/accept/'
+
+
+PUBLISH_HOST = 'ptopenlab.com:80'
+PUBLISH_URL = '/cloudlabapi/api/news'

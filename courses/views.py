@@ -10,7 +10,8 @@ import Image
 import uuid
 import datetime
 
-import urllib,httplib  
+import urllib,httplib
+import json
 
 from courses.models import *
 from SuperClass.settings import *
@@ -134,22 +135,31 @@ def publish(req, article_id):
 
 		else:
 
-			params = urllib.urlencode(
-				{ 'uuid': articles[0].uuid.hex,
+			#params = urllib.urlencode(
+			#	{ 'uuid': articles[0].uuid.hex,
+			#	  'title': articles[0].title,
+			#	  'abstract': articles[0].abstract,
+			#	  'coverImg': articles[0].coverImg,
+			#	  'content': articles[0].content,
+			#	  'createdTime': articles[0].createdTime
+			#	 }
+			#)
+			params = { 'uuid': articles[0].uuid.hex,
 				  'title': articles[0].title,
 				  'abstract': articles[0].abstract,
 				  'coverImg': articles[0].coverImg,
 				  'content': articles[0].content,
-				  'createdTime': articles[0].createdTime
+				  'createdTime': articles[0].createdTime.isoformat()
 				 }
-			)
 
-			headers = {"Content-Type":"application/x-www-form-urlencoded"}
+			headers = {"Content-Type":"application/json"}
 
 			httpClient = httplib.HTTPConnection(PUBLISH_HOST)
-			httpClient.request("POST", PUBLISH_URL, params, headers)
+			httpClient.request("POST", PUBLISH_URL, json.dumps(params), headers)
 
 			response = httpClient.getresponse()
+
+			#print response.read()
 			
 			return HttpResponse(response.read())
 
