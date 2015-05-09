@@ -10,10 +10,14 @@ connect('courseDB')
 class Article(Document):
     uuid = UUIDField()
     title = StringField(max_length=120, required=True)
+    title_en = StringField(max_length=120, required=True)
     abstract = StringField(max_length=120, required=True)
+    abstract_en = StringField(max_length=120, required=True)
+
     createdTime = DateTimeField()
     coverImg = StringField()
     content = StringField()
+    content_en = StringField()
 
 
 class Comment(EmbeddedDocument):

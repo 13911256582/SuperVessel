@@ -14,11 +14,11 @@
     <div class="container">
 
     <div class="page-header">
-          <h1><span style="font-family: 微软雅黑;">新闻</span>
+          <h1><span style="font-family: 微软雅黑;">News</span>
               <span style="font-size: 12px;"><a href="http://127.0.0.1:8000/admin/article/index/cn/">中文</a>
               <a href="http://127.0.0.1:8000/admin/article/index/en/">English</a></span>
           </h1>
-          <button id="submit" type="submit" class="btn btn-primary" onclick="location='/admin/article/new'">创建</button>
+          <button id="submit" type="submit" class="btn btn-primary" onclick="location='/admin/article/new'">Create</button>
     </div>
    
     <ul class="list-group">
@@ -26,7 +26,7 @@
         <li class="list-group-item" style="border: none">
             <div class="row">
             <div class="col-md-8">
-            <h2><span style="font-family: 微软雅黑; color: black"><a href="admin/article/{{article.uuid.hex}}">{{article.title}}</a></span></h2>
+            <h2><span style="font-family: 微软雅黑; color: black"><a href="admin/article/{{article.uuid.hex}}">{{article.title_en}}</a></span></h2>
             </div>
             </div>
 
@@ -36,14 +36,14 @@
             </div>
             
             <div class="col-md-6">
-              <p><span style="font-size: 18px; font-family: 微软雅黑; color: grey">{{article.abstract}}<a href="/admin/article/{{article.uuid.hex}}">[详细]</a></span></p> 
+              <p><span style="font-size: 18px; font-family: 微软雅黑; color: grey">{{article.abstract_en}}<a href="/admin/article/{{article.uuid.hex}}">[details]</a></span></p> 
             </div>
             </div>               
 
             <div class="row">
               <div class="col-md-2">
                 <label><span style="font-family: 微软雅黑; color: grey">
-                {{article.createdTime.month}}月{{article.createdTime.day}}日{{article.createdTime.hour}}:{{article.createdTime.minute}}
+                {{article.createdTime.month}}/{{article.createdTime.day}}/{{article.createdTime.hour}}:{{article.createdTime.minute}}
                 </span></label>
               </div>
 

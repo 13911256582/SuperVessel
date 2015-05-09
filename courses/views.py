@@ -48,7 +48,7 @@ def article(req, article_id):
 			return render_to_response('article.html', {'article': articles[0]})
 
 
-def index(req):
+def index(req, language='cn'):
 	if req.method == 'POST':
 		return
 	else:
@@ -57,33 +57,51 @@ def index(req):
 		if len(articles) == 0:
 			return HttpResponse("No matched article")
 		else:
-			return render_to_response('index_articles.html', {'articles': articles})
+			if language == 'en':
+				return render_to_response('index_articles_en.html', {'articles': articles})
+			else:
+				return render_to_response('index_articles.html', {'articles': articles})
+
+
 
 
 def new(req):
 	if req.method == 'POST':
+
 		title = req.POST['title']
+		title_en = req.POST['title_en']
 		abstract = req.POST['abstract']
+		abstract_en = req.POST['abstract_en']
 		coverImg = req.POST['coverImg']
 		content = req.POST['content']
+		content_en = req.POST['content_en']
 
+		#print("title", title, "title_en", title_en, "abstract", abstract, "abstract_en", abstract_en, "content", content, "content_en", content_en, "coverImg", coverImg)
 
 		#check upload image size
 		if len(coverImg) > 300 * 1024:
 			err = "cover image is bigger than 100KB"
+			print(err)
 			return HttpResponse(err)
 
-		if len(content) > 500 * 1024:
+		if len(content) > 500 * 1024 or len(content_en) > 500 * 1024:
 			err = "content is bigger than 300KB"
+			print(err)
 			return HttpResponse(err)
+
+		
 
 		article = Article()
 		article.uuid = uuid.uuid1().hex
 		article.title = title
+		article.title_en = title_en
 		article.abstract = abstract
+		article.abstract_en = abstract_en
 		article.coverImg = coverImg
 		article.content = content
+		article.content_en = content_en
 		article.createdTime = datetime.datetime.now
+
 
 		if article.save():
 			url = '/admin/article/' + article.uuid
@@ -119,7 +137,7 @@ def delete(req,article_id):
 		if article:
 			article.delete()
 		
-		return HttpResponseRedirect('/admin/article/index')
+		return HttpResponseRedirect('/admin/article/index/cn')
 
 #post article_id to external server
 def publish(req, article_id):
@@ -153,6 +171,7 @@ def publish(req, article_id):
 				 }
 
 			headers = {"Content-Type":"application/json"}
+
 
 			httpClient = httplib.HTTPConnection(PUBLISH_HOST)
 			httpClient.request("POST", PUBLISH_URL, json.dumps(params), headers)

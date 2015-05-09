@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="../static/image.js"></script>
+ </head>
+ <body>
+  <img id="idImg"/>
+   <form>
+      请上传你的相片：<INPUT type="file" name="file" id="up" onchange="imagePreview()">
+    <input type="submit" value="上传">
+    </form>
+  <script>
+    var file = document.getElementById("up");
+    var img = document.getElementById("idImg");
+    var ip = new ImagePreview(file, img, {
+      maxWidth: 400, maxHeight: 400
+    });
+
+    imagePreview = function(){
+      ip.file.onchange = ip.preview();
+    }
+
+
+    //ip.file.onchange = return function(){ ip.preview(); };
+  </script>
+ </body>
+</html>

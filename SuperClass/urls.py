@@ -23,7 +23,8 @@ urlpatterns = patterns('',
     url(r'^article/(?P<article_id>\w+)/$', 'courses.views.article'),
 
     #for admin
-    url(r'^admin/article/index/$', 'courses.views.index'),
+    #url(r'^admin/article/index/$', 'courses.views.index'),
+    url(r'^admin/article/index/(?P<language>\w+)/$', 'courses.views.index'),
     url(r'^admin/article/new/$', 'courses.views.new'),
     url(r'^admin/article/(?P<article_id>\w+)/$', 'courses.views.review'),
     url(r'^admin/article/(?P<article_id>\w+)/publish/$', 'courses.views.publish'),

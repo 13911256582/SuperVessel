@@ -29,6 +29,23 @@
 	outline: none;
 }
 
+
+#editor_english {
+  max-height: 1000px;
+  height: 500px;
+  background-color: white;
+  border-collapse: separate; 
+  border: 1px solid rgb(204, 204, 204); 
+  padding: 4px; 
+  box-sizing: content-box; 
+  -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+  box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+  border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+  overflow: scroll;
+  outline: none;
+}
+
 #cover {
 	border: 1px solid rgb(204, 204, 204);
 	width: 360px;
@@ -49,71 +66,25 @@ div[data-role="editor-toolbar"] {
   cursor: pointer;
 }
 </style>
-
-<script type="text/javascript">
- function setImagePreview(docObj,localImagId,imgObjPreview) 
-        {
-            if(docObj.files && docObj.files[0])
-            {
-                if(docObj.files[0].size >= 300 * 1024)
-                {
-                    alert("File Size is too big, should be < 300K");
-                    return false;
-                }
-                //火狐下，直接设img属性
-                imgObjPreview.style.display = 'block';
-                imgObjPreview.style.width = '300px';
-                imgObjPreview.style.height = '200px';                    
-
-
-                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式  
-                imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
-
-            }
-            else
-            {
-                //IE下，使用滤镜
-                docObj.select();
-                var imgSrc = document.selection.createRange().text;
-                
-                //必须设置初始大小
-                localImagId.style.width = "300px";
-                localImagId.style.height = "200px";
-                
-                //图片异常的捕捉，防止用户修改后缀来伪造图片
-                try
-                {
-                    localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-                    localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
-                 }
-                 catch(e)
-                 {
-                    alert("您上传的图片格式不正确，请重新选择!");
-                    return false;
-                  }                          
-                  imgObjPreview.style.display = 'none';
-                  document.selection.empty();
-            }
-            return true;
-        }
-  
-
-</script>
 <body>
 
 <div class="container">
 	<div class="page-header">
-  		<h1><span style="font-family: 微软雅黑;">创建博客</span></h1>
+  		<h1><span style="font-family: 微软雅黑;">创建博客 目前只支持Google Chrome浏览器</span></h1>
 	</div>
 
   <div class="row">
       <div class="col-md-4" id="localImg">
         <label>封面图片: 360 x 200 </label><br/>
             <img id="preview" src="" width="300px" height="200px" />
-            <input id="PicLoad" width="300px" type="file" onchange="setImagePreview(this,localImg,preview);"></input>
+            <input id="PicLoad" width="300px" type="file" onchange="localPreview();"></input>
       </div>
+  </div>
 
-      <div class="col-md-8">
+  <br/>
+
+  <div class="row">
+      <div class="col-md-6">
         <form role="form">          
           <div class="form-group">
             <label for="courseTitle">标题：</label>
@@ -125,18 +96,25 @@ div[data-role="editor-toolbar"] {
           </div>
         </form>
       </div>
+
+        <div class="col-md-6">
+        <form role="form">          
+          <div class="form-group">
+            <label for="courseTitle">Title：</label>
+            <input type="text" class="form-control" id="title_en" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="abstract">Abstract：</label>
+            <textarea class="form-control" id="abstract_en" placeholder=""></textarea>
+          </div>
+        </form>
+      </div>
+
   </div>
-        
 
- <div class="row">
-  
-  <div class="col-md-4">
-  </div>
 
-  <div class="col-md-8">
-    
-     <label>正文: 图片小于 200 x 200 </label>
-
+<div class="row">
+  <div class="col-md-12">
     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
@@ -183,32 +161,42 @@ div[data-role="editor-toolbar"] {
         <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
         <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
       </div>
+
       <div class="btn-group">
         <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
         <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
       </div>
     </div>
-
+  </div>    
+</div>
 
   <div class="row">
-    <div class="col-md-12">
-    <div id="editor">
+    <div class="col-md-6">
+      <label>正文: 图片小于 200 x 200 </label>
+        <div id="editor">
+
+        </div>
 
     </div>
+
+    <div class="col-md-6">
+      <label>English Version: 图片小于 200 x 200 </label>
+        <div id="editor_english">
+
+        </div>
+
     </div>
   </div>
 
-   <br/>
+  <br/>
  
-   <div class="row">
+  <div class="row">
     <div class="col-md-2">
-    <button id="submit" type="submit" class="btn btn-primary">上传</button>
+      <button id="submit" type="submit" class="btn btn-primary">上传</button>
     </div>
-   </div>
+  </div>
 
-   <br/>
-
-  </div> 
+  <br/>
 </div>
         
     
@@ -220,9 +208,24 @@ div[data-role="editor-toolbar"] {
 <script src="/static/jquery.hotkeys.js"></script>
 <script src="/static/bootstrap-wysiwyg.js"></script>
 <script src="/static/bootstrap.min.js"></script>
+<script src="/static/preview.js"></script>
 <!--
 <script src='{% static "bootstrap.min.js" %}'></script>
 -->
+
+<script>
+
+    var file = document.getElementById("PicLoad");
+    var img = document.getElementById("preview");
+    var ip = new ImagePreview(file, img, {
+      maxWidth: 300, maxHeight: 200
+    });
+
+    localPreview = function(){
+      ip.file.onchange = ip.preview();
+    }
+
+</script>
 
 <script>
 $(document).ready(function(){
@@ -262,10 +265,17 @@ $(document).ready(function(){
 	
 
 	$('#editor').wysiwyg();
+  $('#editor_english').wysiwyg();
     
 	$('#editor').click(function(){
 		$('#editor').wysiwyg();
 	});
+
+
+    
+  $('#editor_english').click(function(){
+    $('#editor_english').wysiwyg();
+  });
 
 
   var preview = document.getElementById("preview");
@@ -302,12 +312,21 @@ $(document).ready(function(){
   $("#submit").click(function(){
 
 
-  var title = $("#title").val();
-  var abstract = $("#abstract").val();
+  var title_ch = $("#title").val();
+  var abstract_ch = $("#abstract").val();
 
-  var content = $("#editor").cleanHtml();
-  if(content.toString().length > 500 * 1024){
-    alert("图片大小：" + content.toString().length + "\n" + "图片必须 < 500KB");
+  var title_en = $("#title_en").val();
+  var abstract_en = $("#abstract_en").val();
+
+  var content_ch = $("#editor").cleanHtml();
+  if(content_ch.toString().length > 500 * 1024){
+    alert("图片大小：" + content_ch.toString().length + "\n" + "图片必须 < 500KB");
+    return;
+  }
+
+  var content_en = $("#editor_english").cleanHtml();
+  if(content_en.toString().length > 500 * 1024){
+    alert("图片大小：" + content_en.toString().length + "\n" + "图片必须 < 500KB");
     return;
   }
 
@@ -323,12 +342,17 @@ $(document).ready(function(){
   //convert preview image to base64
   convertImgToBase64URL(preview.src, function(base64Img){
           //console.log("base64Img:", base64Img);
-
       var postdict = {
-          'title': title,
-          'abstract': abstract,
           'coverImg': base64Img,
-          'content': content,
+          
+          'title': title_ch,
+          'abstract': abstract_ch,
+
+          'title_en': title_en,
+          'abstract_en': abstract_en,
+
+          'content': content_ch,
+          'content_en': content_en
       };
 
       $.ajaxSetup({ 
@@ -342,13 +366,12 @@ $(document).ready(function(){
         //alert(data);
 
       }, "html").error(function(err) {
-        alert("上传出错");
+
+        alert(err.toString());
       });
           
   }, picLoad.files[0].type);
 
-
-  console.log("base64Img:", coverImg);
   
   });
 });
