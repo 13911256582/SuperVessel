@@ -164,9 +164,12 @@ def publish(req, article_id):
 			#)
 			params = { 'uuid': articles[0].uuid.hex,
 				  'title': articles[0].title,
+				  'title_en': articles[0].title_en,
 				  'abstract': articles[0].abstract,
+				  'abstract_en': articles[0].abstract_en,
 				  'coverImg': articles[0].coverImg,
 				  'content': articles[0].content,
+				  'content_en': articles[0].content_en,
 				  'createdTime': articles[0].createdTime.isoformat()
 				 }
 
